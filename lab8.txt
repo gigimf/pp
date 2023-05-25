@@ -16,5 +16,5 @@ de y é 1004):
 (e) *p1: O valor de p1 é 1001.
 (f) *p2: O valor de p2 é 1004.
 (g) *p1 + *p2: 10 + 20 =  30.
-(h) *(&x): (&x) é igual a x, que é 10.
+(h) *(&x): (&x) é igual a x, ou seja, 10.
 (i) *p2: 1004.*/
