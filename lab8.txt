@@ -1,3 +1,4 @@
+1-
 /*Determine o valor especificado em cada item abaixo considerando que foi
 executado as seguintes instruções (assuma que o endereço de x é 1000 e
 de y é 1004):
