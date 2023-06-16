@@ -1,0 +1,516 @@
+1-
+/*Faça um programa que leia 2 valores inteiros e chame uma função quereceba estas 2 variáveis e troque o seu conteúdo, i.e., esta função échamada passando duas variáveis A e B, por exemplo, e após a execução dafunção, A conterá o valor de B e B terá o valor de A. Imprima os valoresantes e depois da troca.*/
+#include <stdio.h>
+
+void trocarValores(int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int main() {
+    int a, b;
+
+    printf("Valor de A e B: ");
+    scanf("%d%d", &a,&b);
+
+    printf("\nValores antes de trocar:\n");
+    printf("A = %d\n", a);
+    printf("B = %d\n", b);
+
+    trocarValores(&a, &b);
+
+    printf("\nValores depois de trocar:\n");
+    printf("A = %d\n", a);
+    printf("B = %d\n", b);
+
+    return 0;
+}
+
+2-
+/*Faça um programa que leia dois valores inteiros e chame uma função quereceba estes 2 valores de entrada e retorne o maior valor na primeiravariável e o menor valor na segunda variável. Escreva o conteúdo das 2variáveis na tela.*/
+#include <stdio.h>
+
+void encontrarMaiorMenor(int a, int b, int *maior, int *menor) {
+    if (a > b) {
+        *maior = a;
+        *menor = b;
+    } 
+    else {
+        *maior = b;
+        *menor = a;
+    }
+}
+
+int main() {
+    int valor1, valor2, maior, menor;
+
+    printf("Digite 2 valores: ");
+    scanf("%d%d", &valor1,&valor2);
+
+    encontrarMaiorMenor(valor1, valor2, &maior, &menor);
+
+    printf("Maior valor: %d\n", maior);
+    printf("Menor valor: %d\n", menor);
+
+    return 0;
+}
+
+
+3-
+/*Crie um programa que contenha uma função que permita passar porparâmetro dois números inteiros A e B. A função deverá calcular a somaentre estes dois números e armazenar o resultado na variável A. Esta funçãonão deverá possuir retorno, mas deverá modificar o valor do primeiroparâmetro. Imprima os valores de A e B na função principal.*/
+#include <stdio.h>
+
+void calcularSoma(int* a, int b) {
+    *a = *a + b;
+}
+
+int main() {
+    int a, b;
+
+    printf("Digite valor de A e B: ");
+    scanf("%d%d", &a,&b);
+
+    printf("\nValores antes de somar:\n");
+    printf("A = %d\n", a);
+    printf("B = %d\n", b);
+
+    calcularSoma(&a, b);
+
+    printf("\nValores depois de somar:\n");
+    printf("A = %d\n", a);
+    printf("B = %d\n", b);
+
+    return 0;
+}
+
+
+4-
+/*Faça um programa que leia três valores inteiros e chame uma função quereceba estes 3 valores de entrada e retorne eles ordenados, ou seja, omenor valor na primeira variável, o segundo menor valor na variável domeio, e o maior valor na última variável. A função deve retornar o valor 1 seos três valores forem iguais e 0 se existirem valores diferentes. Exibir osvalores ordenados na tela.*/
+#include <stdio.h>
+
+int ordenarValores(int* a, int* b, int* c) {
+    int temp;
+
+    if (*a > *b) {
+        temp = *a;
+        *a = *b;
+        *b = temp;
+    }
+    else if (*b > *c) {
+        temp = *b;
+        *b = *c;
+        *c = temp;
+    }
+    else if (*a > *b) {
+        temp = *a;
+        *a = *b;
+        *b = temp;
+    }
+    else if (*a == *b && *b == *c) {
+        return 1;
+    } 
+    else {
+        return 0;
+    }
+}
+
+int main() {
+    int a, b, c;
+
+    printf("Digite valor de A, B e C: ");
+    scanf("%d%d%d", &a,&b,&c);
+
+    printf("\nValores antes de ordenar:\n");
+    printf("A = %d\n", a);
+    printf("B = %d\n", b);
+    printf("C = %d\n", c);
+
+    int saoIguais = ordenarValores(&a, &b, &c);
+
+    printf("\nResultado:\n");
+    printf("A = %d\n", a);
+    printf("B = %d\n", b);
+    printf("C = %d\n", c);
+
+    if (saoIguais) {
+        printf("\nValores iguais\n");
+    } 
+    else {
+        printf("\nValores diferentes\n");
+    }
+
+    return 0;
+}
+
+
+5-
+/*Escreva uma função que dado um número real passado como parâmetro,retorne a parte inteira e a parte fracionária deste número. Escreva umprograma que chama esta função.Protótipo: void frac(float num, int *inteiro, float *frac);*/
+#include <stdio.h>
+
+void fracionaria(float num, int* inteiro, float* fracao) {
+    *inteiro = (int) num;
+    *fracao = num - *inteiro;
+}
+
+int main() {
+    float numero;
+    int parteInteira;
+    float parteFracionaria;
+
+    printf("Digite um valor: ");
+    scanf("%f", &numero);
+
+    fracionaria(numero, &parteInteira, &parteFracionaria);
+
+    printf("Parte inteira: %d\n", parteInteira);
+    printf("Parte fracionaria: %.2f\n", parteFracionaria);
+
+    return 0;
+}
+
+
+6-
+/*Implemente uma função que calcule a área da superfície e o volume de umaesfera de raio R. Essa função deve obedecer ao protótipo:void calc_esfera(float R, float *area, float *volume);
+A área da superfície e o volume são dados, respectivamente, por:A = 4 *  * R2V = 4/3 *  * R3*/
+#include <stdio.h>
+#include <math.h>
+
+void esfera(float R, float *area, float *volume) {
+
+    *area = 4 * 3.14159 * pow(R, 2);
+    *volume = (4.0 / 3.0) * 3.14159 * pow(R, 3);
+}
+
+int main() {
+    float raio, area, volume;
+
+    printf("Digite o raio: ");
+    scanf("%f", &raio);
+
+    esfera(raio, &area, &volume);
+
+    printf("Area superficie: %.2f\n", area);
+    printf("Volume: %.2f\n", volume);
+
+    return 0;
+}
+
+7-
+/*Escreva uma função que aceita como parâmetro um array de inteiros com Nvalores, e determina o maior elemento do array e o número de vezes queeste elemento ocorreu no array. Por exemplo, para um array com osseguintes elementos: 5, 2, 15, 3, 7, 15, 8, 6, 15, a função deve retorna parao programa que a chamou o valor 15 e o número 3 (indicando que o número15 ocorreu 3 vezes). A função deve ser do tipo void.*/
+#include <stdio.h>
+
+void maior_ocorrencia(int array[], int tamanho, int *maior, int *ocorrencias) {
+    *maior = array[0];
+    *ocorrencias = 0;
+
+    for (int i = 0; i < tamanho; i++) {
+        if (array[i] > *maior) {
+            *maior = array[i];
+        }
+    }
+
+    for (int i = 0; i < tamanho; i++) {
+        if (array[i] == *maior) {
+            (*ocorrencias)++;
+        }
+    }
+}
+
+int main() {
+    int tamanho, maior, ocorrencias;;
+
+    printf("Digite o tamanho: ");
+    scanf("%d", &tamanho);
+
+    int array[tamanho];
+
+    printf("Digite os valores:\n");
+    for (int i = 0; i < tamanho; i++) {
+        scanf("%d", &array[i]);
+    }
+
+    maior_ocorrencia(array, tamanho, &maior, &ocorrencias);
+
+    printf("Maior elemento: %d\n", maior);
+    printf("Ocorrencias: %d\n", ocorrencias);
+
+    return 0;
+}
+
+8-
+/*Implemente uma função que receba como parâmetro um array de númerosreais de tamanho N e retorne quantos números negativos há nesse array.Essa função deve obedecer ao protótipo: int negativos(float *vet, intN);*/
+#include <stdio.h>
+
+int negativos(float *vet, int N) {
+    int count = 0;
+
+    for (int i = 0; i < N; i++) {
+        if (vet[i] < 0) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+int main() {
+    int tamanho;
+
+    printf("Digite o tamanho: ");
+    scanf("%d", &tamanho);
+
+    float array[tamanho];
+
+    printf("Digite os valores:\n");
+    for (int i = 0; i < tamanho; i++) {
+        scanf("%f", &array[i]);
+    }
+
+    int quantidadeNegativos = negativos(array, tamanho);
+
+    printf("tem %d numeros negativos\n", quantidadeNegativos);
+
+    return 0;
+}
+
+
+9-
+/*Escreva um programa que declare um array de inteiros e um ponteiro parainteiros. Associe o ponteiro ao array. Agora, some mais um (+1) a cadaposição do array usando o ponteiro (use *).*/
+#include <stdio.h>
+
+int main() {
+    int array[5] = {1, 2, 3, 4, 5};
+    int *ptr = array;
+
+    printf("Array:\n");
+    for (int i = 0; i < 5; i++) {
+        printf("%d ", array[i]);
+    }
+    printf("\n");
+
+    printf("Array modificado:\n");
+    for (int i = 0; i < 5; i++) {
+        (*ptr)++;  
+        printf("%d ", array[i]);
+        ptr++;
+    }
+    printf("\n");
+
+    return 0;
+}
+
+10- 
+/*Crie uma função para somar dois arrays. Esta função deve receber doisarrays e retornar a soma em um terceiro array. Caso o tamanho do primeiroe segundo array seja diferente então a função retornará ZERO (0). Caso afunção seja concluída com sucesso a mesma deve retornar o valor UM (1).Utilize aritmética de ponteiros para manipulação do array.*/
+#include <stdio.h>
+
+int somar_arrays(int* array1, int* array2, int* resultado, int tamanho1, int tamanho2) {
+    if (tamanho1 != tamanho2) {
+        return 0; 
+    }
+
+    for (int i = 0; i < tamanho1; i++) {
+        resultado[i] = array1[i] + array2[i];
+    }
+
+    return 1;
+}
+
+void array(int* array, int tamanho) {
+    for (int i = 0; i < tamanho; i++) {
+        printf("%d ", array[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int array1[] = {1, 2, 3, 4, 5};
+    int array2[] = {6, 7, 8, 9, 10};
+    int resultado[5];
+
+    int tamanho1 = sizeof(array1) / sizeof(array1[0]);
+    int tamanho2 = sizeof(array2) / sizeof(array2[0]);
+
+    int sucesso = somar_arrays(array1, array2, resultado, tamanho1, tamanho2);
+
+    if (sucesso) {
+        printf("Soma dos arrays: ");
+        array(resultado, tamanho1);
+    } else {
+        printf("Invalido! Tamanho diferentes.\n");
+    }
+
+    return 0;
+}
+
+11- 
+/*Escreva uma função que retorna o maior valor de um array de tamanho N.Escreva um programa que leia N valores inteiros, imprima o array com ‘k’elementos por linha, e o maior elemento. O valor de ‘k’ também deve serfornecido pelo usuário.*/
+#include <stdio.h>
+
+int encontrar_maior(int array[], int tamanho) {
+    int maior = array[0];
+
+    for (int i = 1; i < tamanho; i++) {
+        if (array[i] > maior) {
+            maior = array[i];
+        }
+    }
+
+    return maior;
+}
+
+void imprimir_array(int array[], int tamanho, int k) {
+    for (int i = 0; i < tamanho; i++) {
+        printf("%d ", array[i]);
+
+        if ((i + 1) % k == 0) {
+            printf("\n");
+        }
+    }
+
+    if (tamanho % k != 0) {
+        printf("\n");
+    }
+}
+
+int main() {
+    int N, k, maior;
+
+    printf("Valor de N: ");
+    scanf("%d", &N);
+
+    int array[N];
+
+    printf("Digite os valores:\n");
+    for (int i = 0; i < N; i++) {
+        scanf("%d", &array[i]);
+    }
+
+    printf("Digite o valor de k: ");
+    scanf("%d", &k);
+
+    maior = encontrar_maior(array, N);
+
+    printf("Array com %d elementos por linha:\n", k);
+    imprimir_array(array, N, k);
+
+    printf("Maior elemento: %d\n", maior);
+
+    return 0;
+}
+
+12-
+/*Escreva uma função que receba um array de inteiros V e os endereços deduas variáveis inteiras, min e max, e armazene nessas variáveis o valormínimo e máximo do array. Escreva também uma função main que use essafunção.*/
+#include <stdio.h>
+
+void min_max(int V[], int tamanho, int *min, int *max) {
+    *min = V[0];
+    *max = V[0];
+
+    for (int i = 1; i < tamanho; i++) {
+        if (V[i] < *min) {
+            *min = V[i];
+        }
+
+        if (V[i] > *max) {
+            *max = V[i];
+        }
+    }
+}
+
+int main() {
+    int array[] = {10, 5, 8, 3, 12, 7};
+    int tamanho = sizeof(array) / sizeof(array[0]);
+    int minimo, maximo;
+
+    min_max(array, tamanho, &minimo, &maximo);
+
+    printf("Array: ");
+    for (int i = 0; i < tamanho; i++) {
+        printf("%d ", array[i]);
+    }
+    printf("\n");
+
+    printf("Minimo: %d\n", minimo);
+    printf("Maximo: %d\n", maximo);
+
+    return 0;
+}
+
+13-
+/*Faça um programa que possua uma função para:- ler 2 notas e retorná-las por parâmetro (chamar uma função dedicada a ler2 notas válidas e que devolver os 2 números lidos);- calcular a média simples e a média ponderada e retorná-las por parâmetro,onde a segunda nota tem peso 2: media_ponderada = (n1 + n2*2)/3*/
+#include <stdio.h>
+
+void notas(float *nota1, float *nota2) {
+    do {
+        printf("Nota 1: ");
+        scanf("%f", nota1);
+    } while (*nota1 < 0 || *nota1 > 10);
+
+    do {
+        printf("Nota 2: ");
+        scanf("%f", nota2);
+    } while (*nota2 < 0 || *nota2 > 10);
+}
+
+void media(float nota1, float nota2, float *media_simples, float *media_ponderada) {
+    *media_simples = (nota1 + nota2) / 2;
+    *media_ponderada = (nota1 + nota2 * 2) / 3;
+}
+
+int main() {
+    float nota1, nota2;
+    float media_simples, media_ponderada;
+
+    notas(&nota1, &nota2);
+    media(nota1, nota2, &media_simples, &media_ponderada);
+
+    printf("Media Simples: %.2f\n", media_simples);
+    printf("Media Ponderada: %.2f\n", media_ponderada);
+
+    return 0;
+}
+
+14-
+/*Implemente uma função que calcule as raízes de uma equação do segundograu do tipoAx2+ Bx + C = 0.Lembrando que:x=−b ± √ Δ2 a
+Onde:Δ=b2−4 acA variável a tem que ser diferente de zero.- Se < 0, não existe real;- Se = 0, existe uma raiz real;- Se ≥ 0, existem duas raízes reais.Essa função deve obedecer ao seguinte protótipo:int raizes(float A, float B, float C, float *X1, float *X2);Essa função deve ter como valor de retorno o número de raízes reais edistintas da equação. Se existirem raízes reais, seus valores devem serarmazenados nas variáveis apontadas por X1 e X2*/
+#include <stdio.h>
+#include <math.h>
+
+int raizes(float A, float B, float C, float *X1, float *X2) {
+    float delta = B * B - 4 * A * C;
+
+    if (delta < 0) {
+        return 0;  
+    } 
+    else if (delta == 0) {
+        *X1 = -B / (2 * A);
+        return 1;  
+    } 
+    else {
+        *X1 = (-B + sqrt(delta)) / (2 * A);
+        *X2 = (-B - sqrt(delta)) / (2 * A);
+        return 2;  
+    }
+}
+
+int main() {
+    float A, B, C;
+    float X1, X2;
+    int num_raizes;
+
+    printf("Digite os valores de A, B e C: ");
+    scanf("%f %f %f", &A, &B, &C);
+
+    num_raizes = raizes(A, B, C, &X1, &X2);
+
+    if (num_raizes == 0) {
+        printf("Nao existe rais reais\n");
+    } else if (num_raizes == 1) {
+        printf("Uma raiz real: %.2f\n", X1);
+    } else {
+        printf("Duas raizes reais: %.2f e %.2f\n", X1, X2);
+    }
+
+    return 0;
+}
