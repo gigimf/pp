@@ -1,0 +1,50 @@
+1- /*1. Crie um programa que:
+a) Aloque dinamicamente um array de 5 números inteiros;
+b) Peça para o usuário digitar os 5 números no espaço alocado;
+c) Mostre na tela os 5 números;
+d) Libere a memória alocada. */
+
+
+
+
+2- /*Faça um programa que leia do usuário o tamanho de um vetor a ser lido
+e faça a alocação dinâmica de memória. Em seguida, leia do usuário
+seus valores e imprima o vetor lido.*/
+
+#include <stdio.h>
+#include <stdlib.h>
+int main() {
+    int n, i;
+    printf("Entre com o tamanho do vetor: ");
+    scanf("%d", &n);
+
+    int *vetor = (int*) malloc(n * sizeof(int)); // alocando memória dinamicamente
+
+    for (i = 0; i < n; i++) {
+        printf("Entre com o valor da posicao %d: ", i);
+        scanf("%d", &vetor[i]);
+    }
+
+    printf("Vetor lido: [ ");
+    for (i = 0; i < n; i++) {
+        printf("%d ", vetor[i]);
+    }
+    printf("]\n");
+
+    free(vetor); // liberando memória alocada dinamicamente
+    return 0;
+}
+
+3- /*Faça um programa que leia do usuário o tamanho de um vetor a ser lido
+e faça a alocação dinâmica de memória. Em seguida, leia do usuário
+seus valores e mostre quantos dos números são pares e quantos são
+ímpares. */
+
+
+4- /*Faça um programa que leia um número N e:
+a) Crie dinamicamente e leia um vetor de inteiro de N posições;
+b) Leia um número inteiro X e conte e mostre os múltiplos desse número
+que existem no vetor. */
+
+
+5- /*
