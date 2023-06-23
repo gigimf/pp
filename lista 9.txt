@@ -4,7 +4,26 @@ b) Peça para o usuário digitar os 5 números no espaço alocado;
 c) Mostre na tela os 5 números;
 d) Libere a memória alocada. */
 
+#include <stdio.h>
+#include <stdlib.h>
 
+int main() {
+    int *numeros = (int*) malloc(5 * sizeof(int)); 
+
+    printf("Digite 5 numeros:\n");
+    for (int i = 0; i < 5; i++) {
+        scanf("%d", &numeros[i]); 
+    }
+
+    printf("Numeros: \n");
+    for (int i = 0; i < 5; i++) {
+        printf("%d ", numeros[i]); 
+    }
+    printf("\n");
+
+    free(numeros); 
+    return 0;
+}
 
 
 2- /*Faça um programa que leia do usuário o tamanho de um vetor a ser lido
@@ -39,7 +58,38 @@ int main() {
 e faça a alocação dinâmica de memória. Em seguida, leia do usuário
 seus valores e mostre quantos dos números são pares e quantos são
 ímpares. */
+#include <stdio.h>
+#include <stdlib.h>
 
+int main() {
+    int tamanho;
+    int *vetor;
+    int pares = 0, impares = 0;
+
+    printf("Digite o tamanho do vetor: ");
+    scanf("%d", &tamanho);
+
+    vetor = (int*) malloc(tamanho * sizeof(int));
+
+    printf("Digite os valores do vetor:\n");
+    for (int i = 0; i < tamanho; i++) {
+        scanf("%d", &vetor[i]);
+
+        if (vetor[i] % 2 == 0) {
+            pares++;
+        } 
+        else {
+            impares++;
+        }
+    }
+
+    printf("Numeros pares: %d\n", pares);
+    printf("Numeros impar: %d\n", impares);
+
+    free(vetor);
+
+    return 0;
+}
 
 4- /*Faça um programa que leia um número N e:
 a) Crie dinamicamente e leia um vetor de inteiro de N posições;
@@ -85,8 +135,42 @@ int main() {
 }
 
 5-
+#include <stdio.h>
+#include <stdlib.h>
 
-6)
+int main() {
+    int N;
+    printf("Digite valor de N: ");
+    scanf("%d", &N);
+
+    int* vetor = (int*)malloc(N * sizeof(int));
+
+    for (int i = 0; i < N; i++) {
+        printf("Digite o valor para a posicao %d: ", i);
+        scanf("%d", &vetor[i]);
+    }
+    
+    int X;
+    printf("Digite o valor de X: ");
+    scanf("%d", &X);
+    
+    int contador = 0;
+    
+    printf("Multiplos de X no vetor: ");
+    for (int i = 0; i < N; i++) {
+        if (vetor[i] % X == 0) {
+            printf("%d ", vetor[i]);
+            contador++;
+        }
+    }
+    printf("\nTem %d multiplos de X: %d\n", contador);
+    
+    free(vetor);
+    
+    return 0;
+}
+
+6-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -136,7 +220,8 @@ int main()
     return 0;
 }
 
-8)#include <stdio.h>
+8-
+#include <stdio.h>
 #include <stdlib.h>
 
 int main()
@@ -169,7 +254,7 @@ int main()
     return 0;
 }
 
-10)
+10-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -197,7 +282,54 @@ int main()
     return 0;
 }
 
-12)
+11-
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct {
+    int matricula;
+    char sobrenome[50];
+    int ano_nascimento;
+} Aluno;
+
+int main() {
+    int num_alunos;
+    printf("Quantos alunos vao ser cadastrado?: ");
+    scanf("%d", &num_alunos);
+
+    Aluno* alunos = (Aluno*)malloc(num_alunos * sizeof(Aluno));
+
+    if (alunos == NULL) {
+        printf("Erro ao alocar memoria\n");
+        return 1;
+    }
+
+    for (int i = 0; i < num_alunos; i++) {
+        printf("\n=-=-= Aluno %d =-=-=\n", i + 1);
+        printf("Matricula: ");
+        scanf("%d", &alunos[i].matricula);
+        printf("Sobrenome: ");
+        scanf("%s", alunos[i].sobrenome);
+        printf("Ano de Nascimento: ");
+        scanf("%d", &alunos[i].ano_nascimento);
+    }
+
+    printf("\nDados\n");
+    for (int i = 0; i < num_alunos; i++) {
+        printf("=-=-= Aluno %d =-=-=\n", i + 1);
+        printf("Matricula: %d\n", alunos[i].matricula);
+        printf("Sobrenome: %s\n", alunos[i].sobrenome);
+        printf("Ano de Nascimento: %d\n", alunos[i].ano_nascimento);
+        printf("\n");
+    }
+
+    free(alunos);
+
+    return 0;
+}
+
+
+12-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -251,7 +383,68 @@ int main()
     return 0;
 }
 
-14)
+13-
+#include <stdio.h>
+#include <stdlib.h>
+
+int buscaValor(int** matriz, int linhas, int colunas, int valor) {
+    for (int i = 0; i < linhas; i++) {
+        for (int j = 0; j < colunas; j++) {
+            if (matriz[i][j] == valor) {
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+int main() {
+    int linhas, colunas;
+    printf("Digite numero de linhas e coluna matriz: ");
+    scanf("%d%d", &linhas,&colunas);
+
+    int** matriz = (int**)malloc(linhas * sizeof(int*));
+    if (matriz == NULL) {
+        printf("Erro ao alocar memoria.\n");
+        return 1;
+    }
+
+    for (int i = 0; i < linhas; i++) {
+        matriz[i] = (int*)malloc(colunas * sizeof(int));
+        if (matriz[i] == NULL) {
+            printf("Erro ao alocar memoria.\n");
+            return 1;
+        }
+    }
+
+    printf("\nDigite os numeros da matriz:\n");
+    for (int i = 0; i < linhas; i++) {
+        for (int j = 0; j < colunas; j++) {
+            printf("posicao [%d][%d]: ", i, j);
+            scanf("%d", &matriz[i][j]);
+        }
+    }
+
+    int valor;
+    printf("\nValor a ser buscado: ");
+    scanf("%d", &valor);
+    int encontrado = buscaValor(matriz, linhas, colunas, valor);
+
+    if (encontrado) {
+        printf("\nValor %d encontrado\n", valor);
+    } else {
+        printf("\nValor %d nao encontrado\n", valor);
+    }
+
+    for (int i = 0; i < linhas; i++) {
+        free(matriz[i]);
+    }
+    free(matriz);
+
+    return 0;
+}
+
+14-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -281,7 +474,69 @@ int main()
     return 0;
 }
 
-16)
+15-
+#include <stdio.h>
+#include <stdlib.h>
+
+void lerMatriz(int** matriz, int linhas, int colunas) {
+    printf("Numeros da matriz: \n");
+
+    for (int i = 0; i < linhas; i++) {
+        for (int j = 0; j < colunas; j++) {
+            scanf("%d", &matriz[i][j]);
+        }
+    }
+}
+
+void localizarMaioresNumeros(int** matriz, int linhas, int colunas) {
+    int maioresNumeros[3] = { 0 }; 
+    int linhasMaioresNumeros[3] = { 0 }; 
+    int colunasMaioresNumeros[3] = { 0 }; 
+
+    for (int i = 0; i < linhas; i++) {
+        for (int j = 0; j < colunas; j++) {
+            for (int k = 0; k < 3; k++) {
+                if (matriz[i][j] > maioresNumeros[k]) {
+                    for (int l = 2; l > k; l--) {
+                        maioresNumeros[l] = maioresNumeros[l - 1];
+                        linhasMaioresNumeros[l] = linhasMaioresNumeros[l - 1];
+                        colunasMaioresNumeros[l] = colunasMaioresNumeros[l - 1];
+                    }
+                    maioresNumeros[k] = matriz[i][j];
+                    linhasMaioresNumeros[k] = i;
+                    colunasMaioresNumeros[k] = j;
+                    break; 
+                }
+            }
+        }
+    }
+
+    printf("\nOs tres maiores numeros da matriz:\n");
+    for (int i = 0; i < 3; i++) {
+        printf("Numero: %d\tLinha: %d\tColuna: %d\n", maioresNumeros[i], linhasMaioresNumeros[i], colunasMaioresNumeros[i]);
+    }
+}
+
+int main() {
+    int N, M;
+    printf("Digite numero de linhas e coluna matriz: ");
+    scanf("%d%d", &N,&M);
+
+    int** matriz = (int**)malloc(N * sizeof(int*));
+    for (int i = 0; i < N; i++) {
+        matriz[i] = (int*)malloc(M * sizeof(int));
+    }
+    lerMatriz(matriz, N, M);
+    localizarMaioresNumeros(matriz, N, M);
+    for (int i = 0; i < N; i++) {
+        free(matriz[i]);
+    }
+    free(matriz);
+    return 0;
+}
+
+
+16-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -318,7 +573,57 @@ int main()
     return 0;
 }
 
-18)
+17-
+#include <stdio.h>
+#include <stdlib.h>
+
+void copiarValores(int* vetorInicial, int* vetorExpandido, int tamanho) {
+    for (int i = 0; i < tamanho; i++) {
+        vetorExpandido[i] = vetorInicial[i];
+    }
+}
+
+void exibirVetor(int* vetor, int tamanho) {
+    printf("Vetor lido:\n");
+    for (int i = 0; i < tamanho; i++) {
+        printf("%d ", vetor[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int tamanhoInicial = 10; 
+    int tamanhoAtual = tamanhoInicial;
+    int* vetor = (int*)malloc(tamanhoAtual * sizeof(int)); 
+    int valor;
+    int posicao = 0; 
+
+    printf("Digite os numeros ( 0 para encerrar): \n");
+
+    while (1) {
+        scanf("%d", &valor);
+        if (valor == 0) {
+            break; 
+        }
+        vetor[posicao] = valor;
+        posicao++;
+        if (posicao == tamanhoAtual) {
+            int tamanhoExpandido = tamanhoAtual + 10;
+            int* vetorExpandido = (int*)malloc(tamanhoExpandido * sizeof(int));
+            copiarValores(vetor, vetorExpandido, tamanhoAtual);
+            free(vetor); 
+            vetor = vetorExpandido;
+            tamanhoAtual = tamanhoExpandido;
+        }
+    }
+
+    exibirVetor(vetor, posicao);
+    free(vetor); 
+
+    return 0;
+}
+
+18-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -348,7 +653,120 @@ int main()
     return 0;
 }
 
-20)
+19-
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_NOMES 5
+#define TAMANHO_NOME 31
+
+void exibirMatriz(char matriz[MAX_NOMES][TAMANHO_NOME]) {
+    printf("Matriz de nomes:\n");
+    for (int i = 0; i < MAX_NOMES; i++) {
+        printf("Linha %d: %s\n", i + 1, matriz[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    char matriz[MAX_NOMES][TAMANHO_NOME];
+    char nome[TAMANHO_NOME];
+    int opcao;
+    int linha;
+
+    for (int i = 0; i < MAX_NOMES; i++) {
+        strcpy(matriz[i], "");
+    }
+
+    while (1) {
+        printf("Escolha uma opcao:\n");
+        printf("[1] Gravar um nome em uma linha da matriz\n");
+        printf("[2] Apagar o nome contido em uma linha da matriz\n");
+        printf("[3] Procurar um nome e substituir por outro nome\n");
+        printf("[4] Procurar um nome e apagar\n");
+        printf("[5] Recuperar o nome contido em uma linha da matriz\n");
+        printf("[0] Sair\n");
+        scanf("%d", &opcao);
+
+        if (opcao == 0) {
+            break; 
+        }
+
+        switch (opcao) {
+            case 1:
+                printf("Nome: ");
+                scanf("%s", nome);
+                printf("Numero da linha (1 a %d): ", MAX_NOMES);
+                scanf("%d", &linha);
+                linha--; 
+                strcpy(matriz[linha], nome);
+                printf("Nome gravado com sucesso.\n");
+                break;
+
+            case 2:
+                printf("Numero da linha (1 a %d): ", MAX_NOMES);
+                scanf("%d", &linha);
+                linha--; 
+                strcpy(matriz[linha], "");
+                printf("Nome apagado com sucesso.\n");
+                break;
+
+            case 3:
+                printf("Nome a ser procurado: ");
+                scanf("%s", nome);
+                printf("Digite o novo nome: ");
+                scanf("%s", matriz[linha]);
+                for (linha = 0; linha < MAX_NOMES; linha++) {
+                    if (strcmp(matriz[linha], nome) == 0) {
+                        printf("Digite o novo nome: ");
+                        scanf("%s", matriz[linha]);
+                        printf("Nome substituido com sucesso.\n");
+                        break;
+                    }
+                }
+                if (linha == MAX_NOMES) {
+                    printf("Nome nn encontrado.\n");
+                }
+                break;
+
+            case 4:
+                printf("Nome a ser procurado: ");
+                scanf("%s", nome);
+                for (linha = 0; linha < MAX_NOMES; linha++) {
+                    if (strcmp(matriz[linha], nome) == 0) {
+                        strcpy(matriz[linha], "");
+                        printf("Nome apagado com sucesso.\n");
+                        break;
+                    }
+                }
+                if (linha == MAX_NOMES) {
+                    printf("Nome nn encontrado.\n");
+                }
+                break;
+
+            case 5:
+                printf("Digite o numero da linha (1 a %d): ", MAX_NOMES);
+                scanf("%d", &linha);
+                linha--; 
+                if (strcmp(matriz[linha], "") != 0) {
+                    printf("Nome na linha %d: %s\n", linha + 1, matriz[linha]);
+                } else {
+                    printf("Nenhum nome armazenado na linha %d.\n", linha + 1);
+                }
+                break;
+
+            default:
+                printf("Opcao invalida. Tente novamente.\n");
+        }
+
+        exibirMatriz(matriz);
+    }
+
+    return 0;
+}
+
+20-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -398,4 +816,67 @@ int main()
     }
     return 0;
         
+}
+
+21-
+#include <stdio.h>
+#include <stdlib.h>
+
+void lerMatriz(int matriz[][10], int linhas, int colunas) {
+    printf("Numeros matriz\n");
+    for (int i = 0; i < linhas; i++) {
+        for (int j = 0; j < colunas; j++) {
+            printf("Posicao [%d][%d]: ", i, j);
+            scanf("%d", &matriz[i][j]);
+        }
+    }
+}
+
+void multiplicarMatrizes(int matrizA[][10], int matrizB[][10], int matrizProduto[][10], int linhasA, int colunasA, int colunasB) {
+    for (int i = 0; i < linhasA; i++) {
+        for (int j = 0; j < colunasB; j++) {
+            matrizProduto[i][j] = 0;
+            for (int k = 0; k < colunasA; k++) {
+                matrizProduto[i][j] += matrizA[i][k] * matrizB[k][j];
+            }
+        }
+    }
+}
+
+void exibirMatriz(int matriz[][10], int linhas, int colunas) {
+    printf("=-=-= Matriz =-=-=\n");
+    for (int i = 0; i < linhas; i++) {
+        for (int j = 0; j < colunas; j++) {
+            printf("%d\t", matriz[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int a, b, c, d;
+
+    printf("dimensao matriz (a, b, c, d): ");
+    scanf("%d %d %d %d", &a, &b, &c, &d);
+
+    if (b != c) {
+        printf("Erro\n");
+        return 0;
+    }
+
+    int matrizA[10][10], matrizB[10][10], matrizProduto[10][10];
+
+    printf("=-=-= Matriz A =-=-=\n");
+    lerMatriz(matrizA, a, b);
+    printf("\n=-=-= Matriz B =-=-=\n");
+    lerMatriz(matrizB, c, d);
+    multiplicarMatrizes(matrizA, matrizB, matrizProduto, a, b, d);
+
+    exibirMatriz(matrizA, a, b);
+    printf("\n");
+    exibirMatriz(matrizB, c, d);
+    printf("\n");
+    exibirMatriz(matrizProduto, a, d);
+
+    return 0;
 }
